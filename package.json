@@ -1,0 +1,28 @@
+{
+  "name": "audio2strudel-core",
+  "version": "1.0.0",
+  "description": "Pure audio analysis library for pitch detection, key detection, and tempo estimation",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest"
+  },
+  "keywords": [
+    "audio",
+    "pitch",
+    "detection",
+    "music",
+    "analysis",
+    "strudel"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
