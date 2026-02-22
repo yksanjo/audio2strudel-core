@@ -1,117 +1,84 @@
 # audio2strudel-core
 
-Pure TypeScript library for audio analysis - pitch detection, key detection, tempo estimation, and Strudel code generation.
+## Detailed Description
 
-## Features
+audio2strudel-core is maintained as an industry-grade software project with production-ready engineering practices.  
+This repository includes documented setup, quality gates, operational guidance, and governance standards so contributors can safely build, test, and ship changes with confidence.
 
-- **Pitch Detection**: Autocorrelation-based algorithm for accurate melody extraction
-- **Key Detection**: Krumhansl-Schmuckler algorithm for harmonic key detection  
-- **Tempo Estimation**: Energy-based beat tracking for BPM detection
-- **Melody Extraction**: Continuous pitch tracking with note segmentation
-- **Chord Generation**: Harmonic analysis with chord progression generation
-- **Strudel Code Generation**: Ready-to-use Strudel live coding patterns
+## Problem Statement
 
-## Installation
+Describe the user or business problem this project solves, the target users, and expected outcomes.
+
+## Solution Overview
+
+Summarize the architecture, core modules, and runtime behavior at a high level.
+
+## Key Features
+
+- Clear project scope and intended use.
+- Reproducible local development workflow.
+- Test coverage and CI quality gates.
+- Security and contribution policies.
+- Deployment-ready repository structure.
+
+## Repository Structure
+
+```text
+.
+|-- src/                  # Core implementation
+|-- tests/                # Automated test suites
+|-- docs/                 # Design notes and operational docs
+|-- .github/workflows/    # CI pipelines
+|-- README.md
+|-- LICENSE
+|-- CONTRIBUTING.md
+|-- SECURITY.md
+|-- CODE_OF_CONDUCT.md
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Git
+- Project runtime/toolchain for this repo
+
+### Local Setup
 
 ```bash
-npm install audio2strudel-core
+npm ci
+npm run lint
+npm test
+npm run build
 ```
 
 ## Usage
 
-```typescript
-import { analyzeAudio } from 'audio2strudel-core';
+Document primary commands, API routes, CLI examples, or UI workflows here.
 
-// Analyze audio from Float32Array (e.g., from Web Audio API)
-const result = analyzeAudio(audioData, sampleRate, {
-  pitchSensitivity: 50,
-  autoDetectTempo: true,
-  autoDetectKey: true,
-  quantizeNotes: true,
-  quantizeValue: '1/16',
-});
+## Quality Standards
 
-console.log(result.strudelCode.combined);
-// Output: stack(
-//   note("c4 e4 g4 e4").sound("piano"),
-//   note("[c4,e4,g4] [d4,f4,a4]").sound("piano")
-// ).cpm(30)
-```
+- CI must pass before merge.
+- Changes require tests for critical behavior.
+- Security-sensitive changes should include risk notes.
+- Keep pull requests focused and reviewable.
 
-## API
+## Security
 
-### Core Functions
+See `SECURITY.md` for responsible disclosure and handling guidelines.
 
-- `analyzeAudio(data, sampleRate, params)` - Full audio analysis pipeline
-- `detectPitch(frame, sampleRate)` - Detect pitch from audio frame
-- `detectTempo(data, sampleRate)` - Detect BPM from audio data
-- `detectKey(pitchClassHistogram)` - Detect musical key
-- `extractMelody(data, sampleRate, params)` - Extract melody notes
-- `extractChords(data, sampleRate, duration, key)` - Extract chord progression
-- `generateStrudelCode(melody, chords, tempo, timeSignature)` - Generate Strudel patterns
+## Contributing
 
-### Types
+See `CONTRIBUTING.md` for branching, commit, and pull request expectations.
 
-```typescript
-interface Note {
-  note: string;    // e.g., "c4", "e5"
-  time: number;   // Start time in seconds
-  duration?: number; // Duration in seconds
-}
+## Roadmap
 
-interface Chord {
-  notes: string[];  // e.g., ["c3", "e3", "g3"]
-  name: string;     // e.g., "C", "Dm"
-  time: number;
-  duration?: number;
-  degree?: string;  // e.g., "I", "ii"
-}
-```
+Track upcoming milestones, technical debt, and planned feature work.
 
-## Examples
+## Support
 
-### Pitch Detection
-
-```typescript
-import { detectPitch, frequencyToNote } from 'audio2strudel-core';
-
-const pitch = detectPitch(audioFrame, 44100);
-const noteName = frequencyToNote(pitch); // "c4"
-```
-
-### Tempo Detection
-
-```typescript
-import { detectTempo } from 'audio2strudel-core';
-
-const bpm = detectTempo(audioData, 44100); // 120
-```
-
-### Strudel Code Generation
-
-```typescript
-import { generateStrudelCode } from 'audio2strudel-core';
-
-const code = generateStrudelCode(
-  [{ note: 'c4', time: 0, duration: 0.5 }],
-  [{ notes: ['c3', 'e3', 'g3'], name: 'C', time: 0, duration: 2 }],
-  120,
-  '4/4'
-);
-```
-
-## Browser Support
-
-Works in browsers via Web Audio API:
-
-```javascript
-const audioContext = new AudioContext();
-const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-const channelData = audioBuffer.getChannelData(0);
-
-const result = analyzeAudio(channelData, audioBuffer.sampleRate);
-```
+Open a GitHub issue for bugs, feature requests, or documentation gaps.
 
 ## License
 
-MIT
+This project is released under the MIT License.
